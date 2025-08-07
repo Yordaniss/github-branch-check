@@ -4,6 +4,12 @@ A GitHub Action that checks whether a maintenance branch contains commits that a
 
 ---
 
+## 🧠 Main idea
+
+Combine this action with cron to check the branches without manual work. See example
+
+---
+
 ## ✅ Features
 
 - Compares a maintenance branch to a base branch
@@ -36,6 +42,8 @@ on:
         description: 'Create issue if changes found?'
         required: false
         default: 'true'
+  schedule:
+    - cron: '0 9 * * 1' # each monday
 
 permissions:
   issues: write
