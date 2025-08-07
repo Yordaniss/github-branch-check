@@ -16,14 +16,16 @@ A GitHub Action that checks whether a maintenance branch contains commits that a
 
 ## 🚀 Usage
 
+### Important to give also write permissions to issues for automatic creating process 
+
 ```yaml
-name: Maintenance Check
+name: Test Maintenance Checker
 
 on:
   workflow_dispatch:
     inputs:
       target_branch:
-        description: 'Maintenance branch to compare'
+        description: 'Maintenance Branch to check'
         required: true
         default: 'maintenance-release-1'
       base_branch:
@@ -31,16 +33,20 @@ on:
         required: false
         default: 'main'
       create_issue:
-        description: 'Create issue if differences found?'
+        description: 'Create issue if changes found?'
         required: false
         default: 'true'
+
+permissions:
+  issues: write
+  contents: read
 
 jobs:
   check:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: your-username/maintenance-check-action@v1
+      - uses: actions/checkout@v4
+      - uses: Yordaniss/github-branch-check@v1.0.4
         with:
           target_branch: ${{ github.event.inputs.target_branch }}
           base_branch: ${{ github.event.inputs.base_branch }}
