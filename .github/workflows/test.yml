@@ -1,0 +1,28 @@
+name: Test Maintenance Checker
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Maintenance Branch to check'
+        required: true
+        default: 'maintenance-release-1'
+      base_branch:
+        description: 'Base branch to compare against'
+        required: false
+        default: 'main'
+      create_issue:
+        description: 'Create issue if changes found?'
+        required: false
+        default: 'true'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Yordaniss/github-branch-check@v1
+        with:
+          target_branch: ${{ github.event.inputs.target_branch }}
+          base_branch: ${{ github.event.inputs.base_branch }}
+          create_issue: ${{ github.event.inputs.create_issue }}
