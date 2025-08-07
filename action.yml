@@ -1,0 +1,31 @@
+name: 'Maintenance Branch Checker'
+description: 'Checks if a maintenance branch contains commits not yet merged into a base branch.'
+author: 'Dmytro Werner'
+
+inputs:
+  target_branch:
+    description: 'The maintenance branch to check.'
+    required: true
+  base_branch:
+    description: 'The base branch to compare against (e.g. main, develop).'
+    required: false
+    default: 'main'
+  create_issue:
+    description: 'Should an issue be created if differences are found?'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup GitHub CLI
+      uses: cli/cli-action@v1
+
+    - name: Run Maintenance Check
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.target_branch }}" "${{ inputs.base_branch }}" "${{ inputs.create_issue }}"
