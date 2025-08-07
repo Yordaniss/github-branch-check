@@ -30,6 +30,11 @@ $COMMITS
 \`\`\`
 
 Please check if a merge is needed."
+        # Ensure label exists
+        if ! gh label list --limit 100 | grep -q '^maintenance-check'; then
+        echo "🏷️ Creating missing label: maintenance-check"
+        gh label create maintenance-check --color F9D0C4 --description "Created by maintenance-check-action"
+        fi
 
         gh issue create \
           --title "$TITLE" \
