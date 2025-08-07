@@ -24,7 +24,7 @@ runs:
     - name: Run Maintenance Check
       shell: bash
       env:
-        GH_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         chmod +x "${{ github.action_path }}/entrypoint.sh"
         "${{ github.action_path }}/entrypoint.sh" "${{ inputs.target_branch }}" "${{ inputs.base_branch }}" "${{ inputs.create_issue }}"
