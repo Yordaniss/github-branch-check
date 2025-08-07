@@ -21,11 +21,10 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup GitHub CLI
-      uses: cli/cli-action@v1
-
     - name: Run Maintenance Check
       shell: bash
+      env:
+        GH_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         chmod +x "${{ github.action_path }}/entrypoint.sh"
         "${{ github.action_path }}/entrypoint.sh" "${{ inputs.target_branch }}" "${{ inputs.base_branch }}" "${{ inputs.create_issue }}"
