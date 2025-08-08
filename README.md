@@ -10,6 +10,11 @@ Combine this action with cron to check the branches without manual work. See exa
 
 ---
 
+## ℹ️ Important
+
+For creating an issue ```github.token``` will be used
+---
+
 ## ✅ Features
 
 - Compares a maintenance branch to a base branch
