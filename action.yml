@@ -2,6 +2,10 @@ name: 'Maintenance Branch Checker'
 description: 'Checks if a maintenance branch contains commits not yet merged into a base branch.'
 author: 'Dmytro Werner'
 
+branding:
+  icon: 'git-branch'
+  color: 'blue'
+
 inputs:
   target_branch:
     description: 'The maintenance branch to check.'
